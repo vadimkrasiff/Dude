@@ -1,0 +1,48 @@
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formik {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 400px;
+    box-shadow: 0 2px 2px 0 rgb(60 64 67 / 10%), 0 3px 6px 2px rgb(60 64 67 / 15%);
+    border-radius: 3px;
+}
+
+label {
+    position: relative;
+    display: inline-block;
+    margin-left: 7px;
+    z-index: 15;
+    padding: 0 5px;
+    font-size: 16px;
+    top: 10px;
+}
+
+label::before {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    height: 7px;
+    background-color: #fff;
+    content: '';
+    z-index: -1;
+}
+
+
+.buttonIn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
