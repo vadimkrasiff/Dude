@@ -12,7 +12,6 @@
   justify-content: space-between;
   width: 1280px;
   height: 100%;
-  padding-bottom: 90px;
 }
 
 .component {
@@ -32,6 +31,7 @@ a {
   width: 200px;
 
 }
+
 
 @keyframes App-logo-spin {
   from {

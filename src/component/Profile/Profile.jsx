@@ -10,6 +10,7 @@ import Preloader from "../../comon/Preloader"
 import { withAuthRedirect } from "../../hoc/withAuthRedirect"
 import  { getUserProfile, savePhoto } from "../../redux/profile-reducer"
 import css from "./Profile.module.css"
+import ProfileInfo from "./ProfileInfo"
 
 let Profile = (props) => {
 
@@ -75,15 +76,7 @@ let Profile = (props) => {
             
         </div>
         <div className={css.rightInfo}>
-            <div className={css.userInfo}>
-                <div className={css.titleInfo}>
-                    <div>
-                    <div className={css.userName}>{props.profile.fullName}</div>
-                    <div className={css.userStatus}>Status</div>
-                    </div>
-                    <Button type="text" className={css.editProfile} icon={<EditOutlined />}>Edit profile</Button>
-                </div>
-            </div>
+            <ProfileInfo profile={props.profile} />
         </div>
     </div>}
     </>

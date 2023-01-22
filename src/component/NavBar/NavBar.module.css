@@ -14,7 +14,7 @@
 
 .bar a:hover {
     color: #fff;
-    background-color: #23b685b7;
+    background-color: #23b685a4;
     transition: 0.2s;
     box-shadow: 0 0 10px rgb(0 0 0 / 10%);
 }

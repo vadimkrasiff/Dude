@@ -22,6 +22,22 @@ header {
     height: 100px;
 }
 
+.logo {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    background-image: url("../../preloader.svg");
+    filter: invert(1);
+    background-size: 100% 100%;
+    height: 50px;
+    width: 50px;
+    
+  }
+
 .button {
     display: flex;
     justify-content: space-between;

@@ -9,7 +9,7 @@ let Header = ({isAuth, logout}) => {
     
     return <header>
         <div className={css.content}>
-            <div>DUDE</div>
+            <div className={css.logo}><div className={css.icon}></div>DUDES</div>
             { isAuth ?
             <Button onClick={logout} type="text" className={css.button} icon={<LogoutOutlined />}>Sign out</Button>
         :<Button  type="text" className={css.button} icon={<LoginOutlined />}>
