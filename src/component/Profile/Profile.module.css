@@ -23,6 +23,13 @@
     width: 250px;
 }
 
+.editProfile {
+    font-size: 1rem;
+    color: white !important;
+    background-color: #032E46;
+    width: 150px;
+}
+
 .rightInfo {
     width: calc(100% - 265px);
 }
@@ -36,10 +43,11 @@
 
 .titleInfo {
     padding-left: 10px;
+    padding-right: 10px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: calc(100% - 10px);
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 20px);
     height: 100px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -65,3 +73,12 @@ input[type='file'] {
     height: 100%;
     opacity: 0;
 }
+
+.preloader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+  }

@@ -1,6 +1,7 @@
+import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { compose } from "redux";
@@ -10,11 +11,12 @@ import css from "./Login.module.css";
 let Login = ({ isAuth, login }) => {
 
     const [isRemember, setRemember] = useState(false);
+    
+    const [isMove, setMove] = useState(false);
 
     let navigate = useNavigate();
-    if (isAuth) {
-        return (navigate("/profile"));
-    };
+    if (isAuth) navigate("/profile");
+
     return <div className={css.form}>
         <Formik
             initialValues={{ email: "", password: "" }}
@@ -61,16 +63,21 @@ let Login = ({ isAuth, login }) => {
                     </Form.Item>
                     <Form.Item>
                     <label>Password</label>
+                    <div className={css.password}>
                         <Input
-                            type="password"
+                            type={!isMove ?"password": "text"}
                             name="password"
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.password}
                         />
+                    <div className={css.eye} onClick={() => setMove(!isMove)}>
+                        {!isMove ?<EyeInvisibleOutlined />
+                        : <EyeOutlined />}</div>
+                    </div>
                     </Form.Item>
                     <Form.Item>
-                        <Button style={{width: "80px"}} type="primary">
+                        <Button  className={css.logButton} type="primary">
                             Sign in
                             <button className={css.buttonIn} type="submit" disabled={isSubmitting} ></button>
                         </Button>

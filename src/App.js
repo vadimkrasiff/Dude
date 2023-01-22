@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './preloader.svg';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Profile from './component/Profile/Profile';
 import { connect, Provider } from 'react-redux';
@@ -9,13 +10,16 @@ import NavBar from './component/NavBar/NavBar';
 import { initializeApp } from './redux/app-reducer';
 import { useEffect } from 'react';
 import { compose } from 'redux';
+import Preloader from './comon/Preloader';
 
 
 
 let App = (props) => {
 
+if(!props.initialized)
+return <div className="preloader"><Preloader/></div> 
 
-  return < >
+  return <>
         <Header />
         <div className='wrapper'>
 

@@ -29,7 +29,8 @@ export const initializeApp = () => (dispatch) => {
     
     Promise.all([promise])
         .then(() => {
-            dispatch(initializedSucces());
+            setTimeout(()=> dispatch(initializedSucces()),1000)
+            
         });
 };
 
