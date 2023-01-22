@@ -1,5 +1,6 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons"
 import { Button,  } from "antd"
+import { useRef } from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import { connect } from "react-redux"
@@ -26,13 +27,14 @@ let Profile = (props) => {
     }
 
     const onMainPhotoSelected = (e) => {
-        if (e.target.files.length){
+        if (e.target.files.length ){
              props.savePhoto(e.target.files[0])
-             setNewPhoto(!isPhoto)
+             setNewPhoto(!isPhoto);
         }
       }
 
-    useEffect(()=> refreshProfile(), [userId, isPhoto])
+    useEffect(()=> refreshProfile(), [userId])
+
      
     return <div>{!props.profile  || props.isFetching  ? <div>Loading</div>  : <div className={css.content}>
         <div className={css.leftInfo}>

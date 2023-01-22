@@ -22,11 +22,8 @@ const profileReducer = (state= initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
-        case SAVE_PHOTO_SUCCESS:
-            return {
-                ...state, 
-                profile: { ...state.profile, photos: action.photos } 
-            }
+            case SAVE_PHOTO_SUCCESS: {
+                return { ...state, profile: { ...state.profile, photos: action.photos } }}
         default:
             return state;
     }
@@ -34,21 +31,22 @@ const profileReducer = (state= initialState, action) => {
 
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const setFetching = (isFetching) => ({type: SET_FETCHING, isFetching});
-export const savePhotoSuccess = (photos) => ({tpe: SAVE_PHOTO_SUCCESS, photos});
+export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const getUserProfile = (userId) => async(dispatch) => {
     dispatch(setFetching(true))
     let response = await profileAPI.getProfile(userId);
-    
-    dispatch(setUserProfile(response.data));
     dispatch(setFetching(false))
+    dispatch(setUserProfile(response.data));
+    
 }
 
-export const savePhoto = (file) => async (dispatch) => {
-    let response = await profileAPI.savePhoto(file);
+export const savePhoto = (file) => async(dispatch) => {
 
+    let response = await profileAPI.savePhoto(file);
+    
     if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos));
+        dispatch(savePhotoSuccess(response.data.data.photos))
     }
 };
 
