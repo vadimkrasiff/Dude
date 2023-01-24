@@ -10,8 +10,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
-    height: 400px;
+    padding-top: 40px;
+    width: 550px;
+    height: 360px;
     box-shadow: 0 0 10px rgb(0 0 0 / 20%);
     border-radius: 3px;
 }
@@ -37,6 +38,10 @@ label::before {
     z-index: -1;
 }
 
+.rem {
+    margin-left: 0;
+    top: 7px;
+}
 
 .buttonIn {
     position: absolute;
@@ -59,6 +64,12 @@ label::before {
     right: 10px;
     font-size: 1.3rem;
     transition: 0.2s;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    height: 100px;
 }
 
 .logButton {

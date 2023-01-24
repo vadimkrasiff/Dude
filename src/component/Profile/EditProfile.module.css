@@ -18,10 +18,8 @@
     height: 100%;
 }
 
-.userParam {
-    display: flex;
-    height: 45px;
-    width: 100%;
+.formItem {
+    height: 20px;
 }
 
 .title div {

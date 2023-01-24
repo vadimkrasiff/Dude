@@ -59,17 +59,26 @@ let EditProfile = ({ profile, saveProfile }) => {
                     }}
 
                     onSubmit={(values, { setSubmitting }) => {
-                        let profile = { ...values, lookingForAJob: value, contacts: {
-                            facebook: values.facebook,
-                        website: values.website,
-                        vk: values.vk,
-                        twitter: values.twitter,
-                        instagram: values.instagram,
-                        youtube: values.youtube,
-                        github: values.github,
-                        mainLink: values.mainLink
-                        }};
-                        saveProfile(profile)
+                        let count = 0;
+                        let newProfile = {
+                            ...values, lookingForAJob: value, contacts: {
+                                facebook: values.facebook,
+                                website: values.website,
+                                vk: values.vk,
+                                twitter: values.twitter,
+                                instagram: values.instagram,
+                                youtube: values.youtube,
+                                github: values.github,
+                                mainLink: values.mainLink
+                            }
+                        };
+                        for(let key in newProfile) {
+                            if(newProfile[key] !== profile[key])
+                            count++
+                        }
+                        if(!count) {
+                            saveProfile(newProfile)
+                        }
                         setSubmitting(false);
                     }}
                 >
@@ -84,7 +93,7 @@ let EditProfile = ({ profile, saveProfile }) => {
                         <Form onSubmitCapture={handleSubmit}
                             layout="horizontal"
                             labelCol={{
-                                span: 8,
+                                span: 4,
                             }}
                             wrapperCol={{
                                 span: 16,
@@ -96,172 +105,134 @@ let EditProfile = ({ profile, saveProfile }) => {
                                     <div className={cssPr.partInfo}>
                                         <div className={cssPr.titlePart}>Personal information</div>
                                         <div style={{ width: 560 }}>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Full name">
-                                                    <Input
-                                                        type="fullName"
-                                                        name="fullName"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.fullName}
-                                                        className={css.input} />
-                                                </Form.Item>
 
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="About me">
-                                                    <Input
-                                                        type="aboutMe"
-                                                        name="aboutMe"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.aboutMe}
-                                                        className={css.input} />
-                                                </Form.Item>
+                                            <Form.Item className={css.formItem} label="Full name">
+                                                <Input
+                                                    type="fullName"
+                                                    name="fullName"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.fullName}
+                                                    className={css.input} />
+                                            </Form.Item>
 
-                                            </div>
 
-                                            <div className={css.userParam}>
-                                                <Form.Item
-                                                    label="Description">
-                                                    <Input
-                                                        type="lookingForAJobDescription"
-                                                        name="lookingForAJobDescription"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.lookingForAJobDescription}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Job search">
-                                                    <Select style={{ width: 250, marginTop: 10 }}
-                                                        options={[
-                                                            {
-                                                                value: true,
-                                                                label: 'true',
-                                                            },
-                                                            {
-                                                                value: false,
-                                                                label: 'false',
-                                                            },
-                                                        ]}
-                                                        onChange={onChange}
-                                                        defaultValue={profile.lookingForAJob}
-                                                        value={value}
-                                                    />
-
-                                                </Form.Item>
-
-                                            </div>
+                                            <Form.Item className={css.formItem}  label="About me">
+                                                <Input
+                                                    type="aboutMe"
+                                                    name="aboutMe"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.aboutMe}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item
+                                            className={css.formItem} 
+                                                label="Description">
+                                                <Input
+                                                    type="lookingForAJobDescription"
+                                                    name="lookingForAJobDescription"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.lookingForAJobDescription}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item  className={css.formItem}  label="Job search">
+                                                <Select style={{ width: 250, marginTop: 10 }}
+                                                    options={[
+                                                        {
+                                                            value: true,
+                                                            label: 'true',
+                                                        },
+                                                        {
+                                                            value: false,
+                                                            label: 'false',
+                                                        },
+                                                    ]}
+                                                    onChange={onChange}
+                                                    defaultValue={profile.lookingForAJob}
+                                                    value={value}
+                                                />
+                                            </Form.Item>
                                         </div>
                                     </div>
                                     <div className={cssPr.partInfo}>
                                         <div className={cssPr.titlePart}>Contacts</div>
                                         <div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Facebook">
-                                                    <Input
-                                                        type="facebook"
-                                                        name="facebook"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.facebook}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Website">
-                                                    <Input
-                                                        type="website"
-                                                        name="website"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.website}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-
-                                            <div className={css.userParam}>
-                                                <Form.Item
-                                                    label="VK">
-                                                    <Input
-                                                        type="vk"
-                                                        name="vk"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.vk}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Twitter">
-                                                    <Input
-                                                        type="twitter"
-                                                        name="twitter"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.twitter}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Instagram">
-                                                    <Input
-                                                        type="instagram"
-                                                        name="instagram"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.instagram}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-
-                                            <div className={css.userParam}>
-                                                <Form.Item
-                                                    label="YouTube">
-                                                    <Input
-                                                        type="youtube"
-                                                        name="youtube"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.youtube}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Github">
-                                                    <Input
-                                                        type="github"
-                                                        name="github"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.github}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-                                            <div className={css.userParam}>
-                                                <Form.Item label="Main link">
-                                                    <Input
-                                                        type="mainLink"
-                                                        name="mainLink"
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                        value={values.mainLink}
-                                                        className={css.input} />
-                                                </Form.Item>
-
-                                            </div>
-
-
+                                            <Form.Item className={css.formItem}  label="Facebook">
+                                                <Input
+                                                    type="facebook"
+                                                    name="facebook"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.facebook}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item  className={css.formItem}  label="Website">
+                                                <Input
+                                                    type="website"
+                                                    name="website"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.website}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem} 
+                                                label="VK">
+                                                <Input
+                                                    type="vk"
+                                                    name="vk"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.vk}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem}  label="Twitter">
+                                                <Input
+                                                    type="twitter"
+                                                    name="twitter"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.twitter}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem}  label="Instagram">
+                                                <Input
+                                                    type="instagram"
+                                                    name="instagram"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.instagram}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem} 
+                                                label="YouTube">
+                                                <Input
+                                                    type="youtube"
+                                                    name="youtube"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.youtube}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem}  label="Github">
+                                                <Input
+                                                    type="github"
+                                                    name="github"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.github}
+                                                    className={css.input} />
+                                            </Form.Item>
+                                            <Form.Item className={css.formItem}  label="Main link">
+                                                <Input
+                                                    type="mainLink"
+                                                    name="mainLink"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.mainLink}
+                                                    className={css.input} />
+                                            </Form.Item>
                                         </div>
                                     </div>
                                 </div>

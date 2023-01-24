@@ -1,5 +1,5 @@
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Typography } from "antd";
+import { Button, Checkbox, Form, Input, Typography } from "antd";
 import { Formik } from "formik";
 import {  useState } from "react";
 import { connect } from "react-redux";
@@ -9,7 +9,7 @@ import css from "./Login.module.css";
 
 let Login = ({ isAuth, login }) => {
 
-    const [isRemember, setRemember] = useState(false);
+    const [isRemember, setRemember] = useState(true);
     
     const [isMove, setMove] = useState(false);
 
@@ -53,7 +53,7 @@ let Login = ({ isAuth, login }) => {
                     <Form.Item>
                     
                         <Input
-                        style={{width: "400px"}}
+                        style={{width: "450px"}}
                             type="email"
                             name="email"
                             onChange={handleChange}
@@ -75,6 +75,13 @@ let Login = ({ isAuth, login }) => {
                         {!isMove ?<EyeInvisibleOutlined />
                         : <EyeOutlined />}</div>
                     </div>
+                    </Form.Item>
+                    <Form.Item >
+                        <label className={css.rem}>Remember me</label>
+                        <Checkbox 
+                            checked={isRemember}
+                            onChange={()=> setRemember(!isRemember)}
+                        />
                     </Form.Item>
                     <Form.Item>
                         <Button  className={css.logButton} type="primary">
