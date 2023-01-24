@@ -1,5 +1,4 @@
 import './App.css';
-import logo from './preloader.svg';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Profile from './component/Profile/Profile';
 import { connect, Provider } from 'react-redux';
@@ -8,7 +7,6 @@ import Login from './component/Login/Login';
 import Header from './component/Header/Header';
 import NavBar from './component/NavBar/NavBar';
 import { initializeApp } from './redux/app-reducer';
-import { useEffect } from 'react';
 import { compose } from 'redux';
 import Preloader from './comon/Preloader';
 
@@ -28,7 +26,7 @@ return <div className="preloader"><Preloader/></div>
             <div className='component'>
             <Routes >
               <Route path='/login' element={<Login />}></Route>
-              <Route path="/profile" element={<Profile />}></Route>
+              <Route path='/profile/:userId?' element={<Profile />}></Route>
               <Route extends path='/' element={<Navigate to="/profile" replace />}>
               </Route>
             </Routes>

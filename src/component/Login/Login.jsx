@@ -1,10 +1,9 @@
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { Formik } from "formik";
-import { useCallback, useState } from "react";
+import {  useState } from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { compose } from "redux";
+import { Navigate } from "react-router-dom";
 import { login } from "../../redux/auth-reducer";
 import css from "./Login.module.css";
 
@@ -14,8 +13,9 @@ let Login = ({ isAuth, login }) => {
     
     const [isMove, setMove] = useState(false);
 
-    let navigate = useNavigate();
-    if (isAuth) navigate("/profile");
+    if (isAuth) {
+        return <Navigate  to="/profile" replace />
+    }
 
     return <div className={css.form}>
         <Formik

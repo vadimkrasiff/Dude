@@ -1,0 +1,66 @@
+.title {
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #032E46;
+    border-radius: 5px 5px 0 0 ;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.userParam {
+    display: flex;
+    height: 45px;
+    width: 100%;
+}
+
+.title div {
+    margin: 15px;
+    width: 100%;
+}
+
+.input {
+    margin-top: 10px;
+    width: 250px;
+    height: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 750px;
+}
+
+.footer {
+    display: flex;
+    justify-content: end;
+    width: 90%;
+}
+
+.button {
+    margin-left: 20px;
+    width: 80px;
+}
+
+.buttonSave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+}

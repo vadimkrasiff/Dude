@@ -1,4 +1,4 @@
-import { profileAPI, usersAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 
 let initialState = {
     profile: null,
@@ -8,6 +8,7 @@ let initialState = {
 
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const SAVE_PROFILE_DATA = 'SAVE_PROFILE_DATA';
 const SET_FETCHING = 'SET_FETCHING';
 
 const profileReducer = (state= initialState, action) => {
@@ -21,6 +22,9 @@ const profileReducer = (state= initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+            case SAVE_PROFILE_DATA: {
+                return {...state, profile: action.profile}
             }
             case SAVE_PHOTO_SUCCESS: {
                 return { ...state, profile: { ...state.profile, photos: action.photos } }}
@@ -36,7 +40,8 @@ export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos})
 export const getUserProfile = (userId) => async(dispatch) => {
     dispatch(setFetching(true))
     let response = await profileAPI.getProfile(userId);
-    dispatch(setFetching(false))
+    setTimeout(()=> dispatch(setFetching(false)), 300)
+    
     dispatch(setUserProfile(response.data));
     
 }
@@ -49,5 +54,12 @@ export const savePhoto = (file) => async(dispatch) => {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 };
+
+export const saveProfile = (profile) => async(dispatch) => {
+    let response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        dispatch(getUserProfile(profile.userId))
+    }
+}
 
 export default profileReducer;
