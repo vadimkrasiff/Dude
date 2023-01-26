@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import css from "./Header.module.css"
 import {logout} from './../../redux/auth-reducer';
 import { NavLink } from "react-router-dom";
+import Menu from "./Menu/Menu";
 
 let Header = ({isAuth, logout}) => {
     
@@ -11,7 +12,7 @@ let Header = ({isAuth, logout}) => {
         <div className={css.content}>
             <div className={css.logo}><div className={css.icon}></div>DUDES</div>
             { isAuth ?
-            <Button onClick={logout} type="text" className={css.button} icon={<LogoutOutlined />}>Sign out</Button>
+            <Menu logout={logout} />
         :<Button  type="text" className={css.button} icon={<LoginOutlined />}>
             <NavLink to={"/login"}>Sign in</NavLink></Button>}
         </div> 

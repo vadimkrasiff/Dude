@@ -45,7 +45,7 @@ let AppContainer = compose(
   connect(mapStateToProps, initializeApp))
   (App);
 
-  const SamuraiJSApp = () => {
+  const ExportApp = () => {
     return<BrowserRouter>
     <Provider store={store}>
       <AppContainer />
@@ -53,4 +53,4 @@ let AppContainer = compose(
   </BrowserRouter>
   }
 
-export default SamuraiJSApp;
+export default ExportApp;

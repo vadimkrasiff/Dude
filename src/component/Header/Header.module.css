@@ -4,14 +4,13 @@ header {
     transform: translateX(-50%);
     top: 0;
     z-index: 100;
-    font-size: 30px;
     color: #fff;
     background-color: #0F595E;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 100px;
+    height: 80px;
 }
 
 .content {
@@ -19,11 +18,11 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 1280px;
-    height: 100px;
+    height: 100%;
 }
 
 .logo {
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,4 +1,5 @@
 import { profileAPI } from "../api/api";
+import { initializeApp } from "./app-reducer";
 
 let initialState = {
     profile: null,
@@ -56,6 +57,7 @@ export const savePhoto = (file) => async(dispatch) => {
 };
 
 export const saveProfile = (profile) => async(dispatch) => {
+    dispatch(initializeApp())
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(profile.userId))

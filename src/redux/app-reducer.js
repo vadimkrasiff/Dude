@@ -11,7 +11,7 @@ const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case INITIALIZED_SUCCES:
             return {
-                initialized: true
+                initialized: action.initialized
             }
 
         default:
@@ -19,17 +19,17 @@ const appReducer = (state = initialState, action) => {
     }
 }
 
-export const initializedSucces = () => ({
-    type: INITIALIZED_SUCCES
+export const initializedSucces = (initialized) => ({
+    type: INITIALIZED_SUCCES, initialized
 });
 
 export const initializeApp = () => (dispatch) => {
-    
+    dispatch(initializedSucces(false))
     let promise = dispatch(getAuthUserData());
     
     Promise.all([promise])
         .then(() => {
-            setTimeout(()=> dispatch(initializedSucces()),1000)
+            setTimeout(()=> dispatch(initializedSucces(true)),1000)
             
         });
 };

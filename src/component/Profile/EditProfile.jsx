@@ -76,7 +76,7 @@ let EditProfile = ({ profile, saveProfile }) => {
                             if(newProfile[key] !== profile[key])
                             count++
                         }
-                        if(!count) {
+                        if(count) {
                             saveProfile(newProfile)
                         }
                         setSubmitting(false);
