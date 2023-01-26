@@ -75,7 +75,7 @@ let ProfileInfo = ({ profile, saveProfile }) => {
             </div>
         </div>
         <Button className={css.buttonDeploy} onClick={() => setDeploy(!isDeploy)} type="text">
-            {!isDeploy? <div>Подробнее <DownCircleOutlined /></div> : <div>Скрыть <UpCircleOutlined /></div>} 
+            {!isDeploy? <div>Learn more <DownCircleOutlined /></div> : <div>Hide <UpCircleOutlined /></div>} 
             </Button>
 
     </div>

@@ -7,10 +7,9 @@ import { NavLink } from "react-router-dom";
 import { logout } from "../../../redux/auth-reducer";
 
 import useOutsideClick from "../../../hooks/useClickOtside"
-import { getUserProfile } from "../../../redux/profile-reducer";
 import css from "./Menu.module.css"
 
-let Menu = ({ logout, profile, login }) => {
+let Menu = ({ logout, photo, login }) => {
 
     let [openMenu, setMenu] = useState(false);
 
@@ -25,7 +24,7 @@ let Menu = ({ logout, profile, login }) => {
     const lolRef = useRef();
     useOutsideClick(ref, deactiveMenu);
 
-    if (!profile) {
+    if (!photo) {
         return <div className={css.menu}>
             <div style={{
                 backgroundColor: "#fff",
@@ -43,7 +42,7 @@ let Menu = ({ logout, profile, login }) => {
         <div style={openMenu ? {backgroundColor: "#3F7A7E"}: {}}  onClick={() =>{!openMenu && activeMenu()}} className={css.trigger}>
         <div ref={ref} style={{margin: 0}} className={!openMenu && css.ref}></div>
         <div style={{
-            backgroundImage: `url(${profile.photos.small})`,
+            backgroundImage: `url(${photo})`,
             backgroundSize: "100% 100%",
             height: 50,
             width: 50,
@@ -66,9 +65,9 @@ let Menu = ({ logout, profile, login }) => {
 
 let mapStateToProps = (state) => {
     return {
-        profile: state.profile.profile,
-        login: state.auth.login
+        login: state.auth.login,
+        photo: state.auth.photo
     }
 }
 
-export default connect(mapStateToProps, { logout, getUserProfile })(Menu);
+export default connect(mapStateToProps, { logout})(Menu);

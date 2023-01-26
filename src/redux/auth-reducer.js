@@ -3,13 +3,15 @@ import { stopSubmit } from "redux-form";
 
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const GET_CAPTCHA_URL_SUCCES = 'sumurai-network/auth/GET-CAPTCHA-URL-SUCCES';
+const GET_PHOTO_PROFILE = "GET_PHOTO_PROFILE";
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null,
+    photo: null
 }
 
 const authReducer = (state=initialState, action) => {
@@ -20,11 +22,18 @@ const authReducer = (state=initialState, action) => {
                 ...state,
                 ...action.payload
             }
+        case GET_PHOTO_PROFILE:
+            return {
+                ...state,
+                photo: action.photo
+            }
         default:
             return state;
     }
 
 }
+
+export const setPhotoProfile = (photo) => ({ type: GET_PHOTO_PROFILE, photo })
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({
     type: SET_USER_DATA, payload:
@@ -38,12 +47,16 @@ export const getCaptchaUrlSucces = (captchaUrl) => ({
 export const getAuthUserData = () => async (dispatch) => {
     
     let response = await authAPI.me();
-
+    
     if (response.data.resultCode === 0) {
         let { id, email, login } = response.data.data;
+        let photo =  await authAPI.getPhoto(id);
         dispatch(setAuthUserData(id, email, login, true));
+        dispatch(setPhotoProfile(photo))
     }
 };
+
+
 
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
 

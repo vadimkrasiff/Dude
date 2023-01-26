@@ -1,5 +1,6 @@
 import { profileAPI } from "../api/api";
 import { initializeApp } from "./app-reducer";
+import { getPhotoProfile, setPhotoProfile } from "./auth-reducer";
 
 let initialState = {
     profile: null,
@@ -53,11 +54,12 @@ export const savePhoto = (file) => async(dispatch) => {
     
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
+        dispatch(setPhotoProfile(response.data.data.photos.small))
     }
 };
 
 export const saveProfile = (profile) => async(dispatch) => {
-    dispatch(initializeApp())
+    
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(getUserProfile(profile.userId))

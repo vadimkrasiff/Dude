@@ -9,10 +9,14 @@ import NavBar from './component/NavBar/NavBar';
 import { initializeApp } from './redux/app-reducer';
 import { compose } from 'redux';
 import Preloader from './comon/Preloader';
+import Users from './component/Users/Users';
+import { useEffect } from 'react';
 
 
 
 let App = (props) => {
+
+  useEffect(()=>props.initializeApp(), [])
 
 if(!props.initialized)
 return <div className="preloader"><Preloader/></div> 
@@ -25,10 +29,12 @@ return <div className="preloader"><Preloader/></div>
             <NavBar />
             <div className='component'>
             <Routes >
-              <Route path='/login' element={<Login />}></Route>
-              <Route path='/profile/:userId?' element={<Profile />}></Route>
-              <Route extends path='/' element={<Navigate to="/profile" replace />}>
-              </Route>
+              <Route path='/login' element={<Login />}/>
+              <Route path='/profile/:userId?' element={<Profile />}/>
+              <Route path="/users" element={<Users />} />
+              {/* <Route extends path='/users' element={<Navigate to='/users' replace />} /> */}
+              <Route extends path='/' element={<Navigate to="/profile" replace />} />
+              
             </Routes>
             </div>
           </div>
@@ -42,7 +48,7 @@ const mapStateToProps = (state) => ({
 });
 
 let AppContainer = compose(
-  connect(mapStateToProps, initializeApp))
+  connect(mapStateToProps, {initializeApp}))
   (App);
 
   const ExportApp = () => {

@@ -1,0 +1,15 @@
+.users {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user {
+    width: 540px;
+    height: 150px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+    border-radius: 5px;
+}
+

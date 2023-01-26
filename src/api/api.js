@@ -1,4 +1,4 @@
-import  axios from "axios";
+import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
@@ -9,11 +9,9 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-                return response.data
-            });
+    async getUsers(currentPage = 1, pageSize = 10) {
+        let response = await instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return response.data
     },
     follow(userId) {
         return instance.post(`follow/${userId}`)
@@ -21,21 +19,21 @@ export const usersAPI = {
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
     },
-    getProfile(userId){
+    getProfile(userId) {
         console.warn('Obsolete method. Please profileAPI object.')
         return profileAPI.getProfile(userId);
     }
 };
 
 export const profileAPI = {
-    getProfile(userId){
+    getProfile(userId) {
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId){
+    getStatus(userId) {
         return instance.get(`profile/status/` + userId);
     },
-    updateStatus(status){
-        return instance.put(`profile/status`, {status: status});
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status: status });
     },
     savePhoto(photoFile) {
         const formData = new FormData();
@@ -52,14 +50,18 @@ export const profileAPI = {
 };
 
 export const authAPI = {
-    me(){
+    me() {
         return instance.get(`auth/me`);
     },
-    login( email, password, rememberMe = false, captcha = null ){
+    login(email, password, rememberMe = false, captcha = null) {
         return instance.post(`auth/login`, { email, password, rememberMe, captcha });
     },
-    logout(){
+    logout() {
         return instance.delete(`auth/login`);
+    },
+    async getPhoto(userId) {
+        let response = await instance.get(`profile/` + userId);
+        return response.data.photos.small;
     }
 };
 
