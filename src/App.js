@@ -31,8 +31,8 @@ return <div className="preloader"><Preloader/></div>
             <Routes >
               <Route path='/login' element={<Login />}/>
               <Route path='/profile/:userId?' element={<Profile />}/>
-              <Route path="/users" element={<Users />} />
-              {/* <Route extends path='/users' element={<Navigate to='/users' replace />} /> */}
+              <Route path='/users' element={<Users />} />
+              {/* <Route extends path='/users' element={<Navigate to='/users&page=1' replace />} /> */}
               <Route extends path='/' element={<Navigate to="/profile" replace />} />
               
             </Routes>

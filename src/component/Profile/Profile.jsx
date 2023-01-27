@@ -43,9 +43,11 @@ let Profile = (props) => {
 
     return <>{!props.profile || props.isFetching ? <div className={css.content}>
         <div className={css.leftInfo}>
-            <div className={css.avatar}>
-
-            </div>
+        <div className={css.avatar}
+                    style={{
+                        backgroundImage: `url(${userPhoto})`,
+                        backgroundSize: "100% 100%",
+                    }} ></div>
             <Button type="primary" className={css.editButton} >
 
                 <input className={css.inputFile} type="file"  ></input>
