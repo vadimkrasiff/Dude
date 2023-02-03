@@ -4,18 +4,17 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { compose } from "redux";
-import { getDataUsers } from "../../redux/users-reducer";
+import { follow, getDataUsers, setCurrentPage, setPortionPage, unfollow } from "../../redux/users-reducer";
 import css from "./Users.module.css";
 import userPhoto from "./../../user.jpg";
 import { Button } from "antd";
+import useQuery from "../../hooks/useQuery";
+import Paginator from "../../comon/Paginator";
 
-let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage}) => {
+let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurrentPage, setPortionPage, portionPage, follow, unfollow, followingInProgress }) => {
     const lipUsers = ["", "", "", "", "", "", "", "", "", ""]
 
-
-    useEffect(() => { getDataUsers() }, [])
-
-
+    useEffect(() => { getDataUsers(currentPage) }, [currentPage])
 
     if (!users || isFetching) {
         return <div className={css.users}>
@@ -59,13 +58,16 @@ let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage}) => {
                     <div className={css.infoUsers}>
                         <div className={css.name}>{el.name}</div>
                         <div className={css.friendship}>{el.followed ? "Friend" : "Not friend"}</div>
-                        {el.followed ? <Button type="primary" className={css.button}>Unfollow</Button>
-                        :<Button type="primary" className={css.button}>Follow</Button>}
+                        {el.followed ? <Button type="primary" disabled={followingInProgress.some(id => id === el.id)}
+                            onClick={() => unfollow(el.id)} className={css.button}>Unfollow</Button>
+                            : <Button type="primary" disabled={followingInProgress.some(id => id === el.id)}
+                                onClick={() => follow(el.id)} className={css.button}>Follow</Button>}
                     </div>
                 </div>
                 <div className={css.frog}>{el.followed && <div>DUDE</div>}</div>
             </div>
         })}
+        <Paginator totalCount={totalCount} setCurrentPage={setCurrentPage} currentPage={currentPage} portionPage={portionPage} setPortionPage={setPortionPage} />
     </div>
 }
 
@@ -73,7 +75,8 @@ let mapStateToProps = (state) => ({
     users: state.users.users,
     isFetching: state.users.isFetching,
     totalCount: state.users.totalCount,
-    currentPage: state.users.currentPage
+    currentPage: state.users.currentPage,
+    portionPage: state.users.portion,
+    followingInProgress: state.users.followingInProgress
 })
-
-export default compose(connect(mapStateToProps, { getDataUsers }))(Users);
+export default compose(connect(mapStateToProps, { getDataUsers, setCurrentPage, setPortionPage, follow, unfollow }))(Users);
