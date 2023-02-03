@@ -11,6 +11,7 @@ import { compose } from 'redux';
 import Preloader from './comon/Preloader';
 import Users from './component/Users/Users';
 import { useEffect } from 'react';
+import Friends from './component/Friends/Friends';
 
 
 
@@ -33,7 +34,7 @@ return <div className="preloader"><Preloader/></div>
               <Route path='/login' element={<Login />}/>
               <Route path='/profile/:userId?' element={<Profile />}/>
               <Route  path='/users' element={<Users />} />
-              {/* <Route exact path='/users' element={<Navigate to="/users?page=1" replace />} /> */}
+              <Route path='/friends' element={<Friends />} />
               <Route exact path='/' element={<Navigate to="/profile" replace />} />
               
             </Routes>

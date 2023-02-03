@@ -83,12 +83,12 @@ export const getDataUsers = (page, count) => async (dispatch) => {
     dispatch(setTotalCount(response.totalCount))
 }
 
-const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCretor) => {
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
 
     dispatch(toggleFollowingProgress(true, userId));
     let response = await apiMethod(userId);
     if (response.data.resultCode == 0) {
-        dispatch(actionCretor(userId));
+        dispatch(actionCreator(userId));
     }
     dispatch(toggleFollowingProgress(false, userId));
 };

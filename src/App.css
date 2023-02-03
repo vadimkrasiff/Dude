@@ -17,7 +17,7 @@
 }
 
 .component {
-  width: calc(1280px - 180px);
+  width: calc(1280px - 160px);
   height: 100%;
 }
 
