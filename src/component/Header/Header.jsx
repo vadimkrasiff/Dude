@@ -12,7 +12,7 @@ let Header = ({isAuth, logout, getUserProfile}) => {
     
     return <header>
         <div className={css.content}>
-            <div className={css.logo}><div className={css.icon}></div>DUDES</div>
+            <NavLink to='/profile' className={css.logo}><div className={css.icon}></div>DUDES</NavLink>
             { isAuth ?
             <Menu logout={logout}  />
         :<Button  type="text" className={css.button} icon={<LoginOutlined />}>

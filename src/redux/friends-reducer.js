@@ -21,7 +21,7 @@ const friendsReducer = (state = initialState, action) => {
         case UNFRIEND:
             return {
                 ...state,
-                friends: updateObjectInArray(state.friends, action.userId, "id", {followed: false})
+                friends: updateObjectInArray(state.friends, action.userId, "id", {followed: false}),
             }
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
             return {
@@ -71,6 +71,9 @@ export const unfollow =  ( userId) => async(dispatch) => {
     }
     
     dispatch(toggleFollowingProgress(false, userId));
+    let data = await usersAPI.getUsers( null, null, true);
+    if (data.error === null)
+    dispatch(setTotalCount(data.totalCount))
 };
 
 // export const unfollow = (userId) => {

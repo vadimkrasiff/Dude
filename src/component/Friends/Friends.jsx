@@ -17,7 +17,7 @@ let Friends = ({ getDataFriends, friends, isFetching, totalCount, currentPage, s
 
     useEffect(() => { getDataFriends(currentPage) }, [currentPage])
 
-    if ( isFetching) {
+    if (!friends || isFetching) {
         return <div className={css.users}>
             {lipUsers.map((el) => {
                 return <div className={css.user}>
@@ -44,7 +44,7 @@ let Friends = ({ getDataFriends, friends, isFetching, totalCount, currentPage, s
     if(!totalCount) {
         return <div className={css.notFriends}>
             <div>You don't have any friends yet((</div>
-            <div className={css.frogNotFreind}><Preloader/></div> 
+            <div className={css.frogNotFriend}><Preloader/></div> 
         </div>
     }
 
