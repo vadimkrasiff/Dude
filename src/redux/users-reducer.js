@@ -74,9 +74,9 @@ export const setCurrentPage = (currentPage = 1) => ({ type: SET_CURRENT_PAGE, cu
 export const setPortionPage = (portion) => ({ type: SET_PORTION, portion });
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
 
-export const getDataUsers = (page, count) => async (dispatch) => {
+export const getDataUsers = (page, count, friend=null, term) => async (dispatch) => {
     dispatch(setFetching(true))
-    let response = await usersAPI.getUsers(page, count);
+    let response = await usersAPI.getUsers(page, count, friend, term);
     setTimeout(() => dispatch(setFetching(false)), 300)
     if (response.error === null)
         dispatch(setUsersData(response.items))

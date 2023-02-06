@@ -26,7 +26,7 @@ let Paginator = ( {totalCount, setCurrentPage, currentPage, count = 20, portionP
     const rightClick = () => {
         setPortion(portion + 20)
         setPortionPage(portion+20)
-        setCurrentPage(portion+1)
+        setCurrentPage(portion)
     }
 
 

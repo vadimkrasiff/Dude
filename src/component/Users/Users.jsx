@@ -7,12 +7,20 @@ import { compose } from "redux";
 import { follow, getDataUsers, setCurrentPage, setPortionPage, unfollow } from "../../redux/users-reducer";
 import css from "./Users.module.css";
 import userPhoto from "./../../user.jpg";
-import { Button } from "antd";
+import { Button, Form, Input } from "antd";
 import useQuery from "../../hooks/useQuery";
 import Paginator from "../../comon/Paginator";
+import { SearchOutlined } from "@ant-design/icons";
 
 let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurrentPage, setPortionPage, portionPage, follow, unfollow, followingInProgress }) => {
     const lipUsers = ["", "", "", "", "", "", "", "", "", ""]
+
+    const onFinish = (values) => {
+        getDataUsers(currentPage, null, null,values.search) 
+      };
+      const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+      };
 
     useEffect(() => { getDataUsers(currentPage) }, [currentPage])
 
@@ -41,6 +49,32 @@ let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurr
     }
 
     return <div className={css.users}>
+        <div className={css.search}>
+            <Form
+            name="basic"
+             onFinish={onFinish}
+             onFinishFailed={onFinishFailed}
+             autoComplete="off"
+            initialValues={{
+                search: ""
+            }}
+            >
+                <Form.Item   name="search" noStyle={true}
+                rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}>
+                    <Input placeholder="search..."  style={{width: 920, marginRight: 10, height: 40}}/>
+                </Form.Item>
+                <Form.Item noStyle={true}>
+                    <Button type='primary' style={{height: 40, width: 40, fontSize: "1.1rem"}} className={css.button} htmlType='submit' icon={<SearchOutlined />} ></Button>
+
+                </Form.Item>
+                
+            </Form>
+        </div>
         {users.map((el) => {
             return <div className={css.user}>
                 <div className={css.info}>
