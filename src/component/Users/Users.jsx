@@ -1,16 +1,15 @@
 import React from "react";
-import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { compose } from "redux";
 import { follow, getDataUsers, setCurrentPage, setPortionPage, unfollow } from "../../redux/users-reducer";
 import css from "./Users.module.css";
 import userPhoto from "./../../user.jpg";
 import { Button, Form, Input } from "antd";
-import useQuery from "../../hooks/useQuery";
 import Paginator from "../../comon/Paginator";
 import { SearchOutlined } from "@ant-design/icons";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurrentPage, setPortionPage, portionPage, follow, unfollow, followingInProgress }) => {
     const lipUsers = ["", "", "", "", "", "", "", "", "", ""]
@@ -54,25 +53,21 @@ let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurr
             name="basic"
              onFinish={onFinish}
              onFinishFailed={onFinishFailed}
-             autoComplete="off"
             initialValues={{
                 search: ""
             }}
             >
-                <Form.Item   name="search" noStyle={true}
+                <Form.Item 
+                name="search" 
                 rules={[
                     {
                       required: true,
-                      message: 'Please input your password!',
+                      message: 'Please input your search!',
                     },
                   ]}>
-                    <Input placeholder="search..."  style={{width: 920, marginRight: 10, height: 40}}/>
+                    <Input placeholder="search..."  style={{width: 930,  height: 40, position: "relative"}}/>
                 </Form.Item>
-                <Form.Item noStyle={true}>
-                    <Button type='primary' style={{height: 40, width: 40, fontSize: "1.1rem"}} className={css.button} htmlType='submit' icon={<SearchOutlined />} ></Button>
-
-                </Form.Item>
-                
+                <Button n type='primary' style={{height: 40, width: 40, }} className={css.buttonSearch} htmlType='submit' icon={<SearchOutlined />} ></Button>
             </Form>
         </div>
         {users.map((el) => {
@@ -113,4 +108,4 @@ let mapStateToProps = (state) => ({
     portionPage: state.users.portion,
     followingInProgress: state.users.followingInProgress
 })
-export default compose(connect(mapStateToProps, { getDataUsers, setCurrentPage, setPortionPage, follow, unfollow }))(Users);
+export default compose(connect(mapStateToProps, { getDataUsers, setCurrentPage, setPortionPage, follow, unfollow }), withAuthRedirect)(Users);

@@ -1,15 +1,14 @@
 import React from "react";
-import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { compose } from "redux";
 import css from "./Friends.module.css";
 import userPhoto from "./../../user.jpg";
 import { Button } from "antd";
-import useQuery from "../../hooks/useQuery";
-import Paginator from "../../comon/Paginator";
-import { getDataFriends, setCurrentPage, setPortionPage, unfollow } from "../../redux/friends-reducer";
+
+import { withAuthRedirect } from "../../hoc/withAuthRedirect"
+import { getDataFriends, unfollow } from "../../redux/friends-reducer";
 import Preloader from "../../comon/Preloader";
 
 let Friends = ({ getDataFriends, friends, isFetching, totalCount, currentPage, setCurrentPage, setPortionPage, portionPage, unfollow, followingInProgress }) => {
@@ -86,4 +85,4 @@ let mapStateToProps = (state) => ({
     portionPage: state.friends.portion,
     followingInProgress: state.friends.followingInProgress
 })
-export default compose(connect(mapStateToProps, { getDataFriends, unfollow }))(Friends);
+export default compose(connect(mapStateToProps, { getDataFriends, unfollow }), withAuthRedirect )(Friends);

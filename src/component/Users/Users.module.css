@@ -7,14 +7,24 @@
 
 .search {
     display: flex;
+    position: relative;
     align-items: center;
-    justify-content: center;
-    width: 1020px;
+    width: 1000px;
     height: 80px;
+    padding-top: 20px;
+    padding-left: 20px;
     margin-left: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+}
+
+.buttonSearch {
+    position: absolute;
+    top: 27px;
+    right: 20px;
+    width: 100px;
+    background-color: #032E46;
 }
 
 .user {
@@ -53,6 +63,8 @@
     width: 100px;
     background-color: #032E46;
 }
+
+
 
 .frog {
     display: flex;

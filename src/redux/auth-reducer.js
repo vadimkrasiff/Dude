@@ -1,5 +1,6 @@
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
+import { initializeApp, initializedSucces } from "./app-reducer";
 
 const SET_USER_DATA = 'auth/SET-USER-DATA';
 const GET_CAPTCHA_URL_SUCCES = 'sumurai-network/auth/GET-CAPTCHA-URL-SUCCES';
@@ -60,11 +61,14 @@ export const getAuthUserData = () => async (dispatch) => {
 
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
 
-
     let response = await authAPI.login(email, password, rememberMe, captcha);
 
     if (response.data.resultCode === 0) {
+        dispatch(initializedSucces(false))
+
         dispatch(getAuthUserData());
+        
+        setTimeout(()=> dispatch(initializedSucces(true)),1000)
     } else {
         // if (response.data.resultCode === 10) {
         //     dispatch(getCaptchaUrl());
@@ -72,13 +76,15 @@ export const login = (email, password, rememberMe, captcha) => async (dispatch) 
         let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
         dispatch(stopSubmit("login", { _error: message }));
     }
+
 };
 
 export const logout = () => async (dispatch) => {
     let response = await authAPI.logout();
-
     if (response.data.resultCode === 0) {
+        dispatch(initializedSucces(false))
         dispatch(setAuthUserData(null, null, null, false));
+        setTimeout(()=> dispatch(initializedSucces(true)),1000)
     }
 
 };
