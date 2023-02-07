@@ -1,12 +1,11 @@
-import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Form } from "antd";
+import { LoginOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { connect } from "react-redux";
 import css from "./Header.module.css"
 import {logout} from './../../redux/auth-reducer';
 import { NavLink } from "react-router-dom";
 import Menu from "./Menu/Menu";
 import { getUserProfile } from "../../redux/profile-reducer";
-import { useEffect } from "react";
 
 let Header = ({isAuth, logout, getUserProfile}) => {
     

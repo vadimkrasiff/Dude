@@ -12,7 +12,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurrentPage, setPortionPage, portionPage, follow, unfollow, followingInProgress }) => {
-    const lipUsers = ["", "", "", "", "", "", "", "", "", ""]
+    const lipUsers = ["", "", "", "", "", "", "", ""]
 
     const onFinish = (values) => {
         getDataUsers(currentPage, null, null,values.search) 
@@ -25,6 +25,7 @@ let Users = ({ getDataUsers, users, isFetching, totalCount, currentPage, setCurr
 
     if (!users || isFetching) {
         return <div className={css.users}>
+            <div className={css.search}></div>
             {lipUsers.map((el) => {
                 return <div className={css.user}>
                     <div className={css.info}>

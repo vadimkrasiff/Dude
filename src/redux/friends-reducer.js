@@ -3,7 +3,7 @@ import { updateObjectInArray } from "../comon/objects-helper";
 
 const GET_DATA_FRIENDS = "GET_DATA_FRIENDS";
 const SET_FETCHING = 'SET_FETCHING';
-const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
+const SET_FRIENDS_COUNT = 'SET_FRIENDS_COUNT';
 
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FOLLOWING-PROGRESS';
 const UNFRIEND = 'UNFRIEND';
@@ -37,7 +37,7 @@ const friendsReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
-        case SET_TOTAL_COUNT:
+        case SET_FRIENDS_COUNT:
             return {
                 ...state,
                 totalCount: action.totalCount
@@ -50,7 +50,7 @@ const friendsReducer = (state = initialState, action) => {
 const setFriendsData = (friends) => ({ type: GET_DATA_FRIENDS, friends })
 export const unfollowSuccess = (userId) => { return ( {  type: UNFRIEND, userId })};
 export const setFetching = (isFetching) => ({ type: SET_FETCHING, isFetching });
-export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount });
+export const setTotalCount = (totalCount) => ({ type: SET_FRIENDS_COUNT, totalCount });
 export const toggleFollowingProgress = (isFetching, userId) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId });
 
 export const getDataFriends = (page, count) => async (dispatch) => {

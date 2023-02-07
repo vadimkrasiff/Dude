@@ -1,7 +1,6 @@
 import { CaretDownOutlined, DownOutlined, LogoutOutlined, UserOutlined, MessageOutlined, SettingOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React, { useRef, useState } from "react";
-import { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../../redux/auth-reducer";
@@ -21,7 +20,6 @@ let Menu = ({ logout, photo, login }) => {
         setMenu(false);
     }   
     const ref = useRef();
-    const lolRef = useRef();
     useOutsideClick(ref, deactiveMenu);
 
     if (!photo) {
