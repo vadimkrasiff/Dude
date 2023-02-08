@@ -26,7 +26,6 @@
 }
 
 .editProfile {
-    font-size: 1rem;
     color: white !important;
     background-color: #032E46;
     width: 150px;
@@ -39,9 +38,9 @@
     justify-content: space-between;
     box-shadow: 0 0 10px rgb(0 0 0 / 20%);
     border-radius: 3px;
-    padding: 20px 5px 25px 5px;
-    width: calc(100% - 10px);
-    height: 100px;
+    padding: 20px 15px 25px 15px;
+    width: calc(100% - 30px);
+    height: 102px;
 }
 
 .friendsInfo {
@@ -61,8 +60,8 @@
 }
 
 
-.titleFriends {
-    margin-left: 30px;
+.title {
+    margin-left: 10px;
     width: 100%;
     font-weight: 600
 }
@@ -118,7 +117,7 @@ input[type='file'] {
 }
 
 .inputFile {
-    
+
     position: absolute;
     top: 0;
     left: 0;
@@ -157,7 +156,7 @@ input[type='file'] {
 }
 
 .partInfo a div {
-    
+
     color: #032E46;
 }
 
@@ -171,19 +170,34 @@ input[type='file'] {
 }
 
 
-.contacts  {
+.contacts {
     list-style: none;
     overflow: hidden;
-    height: 25px;
+    height: 20px;
     transition: 0.3s;
 }
 
-.fullContacts  {
+.fullContacts {
     list-style: none;
     overflow: hidden;
-    height: 170px;
+    height: 190px;
     transition: 0.3s;
 }
 
+.album {
+    margin-top: 20px;
+    padding: 20px 20px 20px 20px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    border-radius: 3px;
+}
 
+.titleAlbum {
+    font-weight: 600;
+    margin-left: 0px;
+}
 
+.photos {
+    display: flex;
+    margin: 10px 0 10px 0;
+    width: 100%;
+}

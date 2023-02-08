@@ -14,6 +14,8 @@ import ProfileInfo from "./ProfileInfo"
 import userPhoto from "./../../user.jpg";
 
 import { getDataFriends } from "../../redux/friends-reducer";
+import Albums from "./Album/Albums"
+import Photo from "./Photo"
 
 let Profile = (props) => {
 
@@ -21,8 +23,9 @@ let Profile = (props) => {
     let id = userId;
     const [isPhoto, setNewPhoto] = useState(false);
     const [open, setOpen] = useState(false);
+    const [currentPhoto, setCurrentPhoto] = useState('') 
+ 
     const refModal = useRef();
-
 
 
     useOutsideClick(refModal, () => { setOpen(false) })
@@ -43,7 +46,7 @@ let Profile = (props) => {
         props.getUserProfile(id);
     }, [id])
 
-    useEffect(() => { props.getDataFriends(1, 3) }, [])
+    useEffect(() => { props.getDataFriends() }, [])
 
     return <>{!props.profile || props.isFetching ? <div className={css.content}>
         <div className={css.leftInfo}>
@@ -72,7 +75,7 @@ let Profile = (props) => {
                         backgroundImage: `url(${!props.profile.photos.large && userPhoto})`,
                         backgroundSize: "100% 100%",
                     }} >
-                    <div ref={refModal} onClick={() => props.profile.photos.large && setOpen(true)} style={{
+                    <div ref={refModal} onClick={() => {props.profile.photos.large && setOpen(true);  setCurrentPhoto(props.profile.photos.large)}} style={{
                         cursor: "pointer",
                         backgroundImage: `url(${props.profile.photos.large})`,
                         backgroundPosition: "center",
@@ -83,30 +86,7 @@ let Profile = (props) => {
 
                     }}>
                     </div>
-                    <Modal
-
-                        footer={null}
-                        open={open}
-                        closable={false}
-                        onOk={() => setOpen(false)}
-                        onCancel={() => setOpen(false)}
-                        centered
-                        style={{ height: 600 }}
-                        bodyStyle={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            padding: 0,
-                            backgroundImage: `url(${props.profile.photos.large || userPhoto})`,
-                            backgroundSize: "100% 100%",
-                            height: 600,
-                            width: 600,
-                            borderRadius: 5,
-
-                        }}>
-                        <Button onClick={() => setOpen(false)} type="text"
-                            style={{ position: "absolute", right: -50, top: 0 }} icon={<CloseOutlined style={{ color: "white", fontSize: "20px" }} />}></Button>
-                    </Modal>
+                    <Photo open={open} setOpen={setOpen} photo={currentPhoto} />
                 </div>
                 {!userId ?
                     <Button type="primary" className={css.editButton} icon={<EditOutlined />}>
@@ -119,9 +99,9 @@ let Profile = (props) => {
                 }
                 {(props.friends && !userId) &&
                     <NavLink to="/friends" className={css.friends}>
-                        <div className={css.titleFriends}>Friends<span className={css.friendsCount}>{props.friendsCount}</span></div>
+                        <div className={css.title}>Friends<span className={css.friendsCount}>{props.friendsCount}</span></div>
                         <div className={css.friendsInfo}>
-                            {props.friends.map(el => (<NavLink to={`/profile/${el.id}`} className={css.friend}>
+                            {props.friends.map((el, index) => index < 3 && (<NavLink to={`/profile/${el.id}`} className={css.friend}>
                                 <div style={{
                                     backgroundImage: `url(${el.photos.small || userPhoto})`,
                                     backgroundSize: "100% 100%",
@@ -139,6 +119,7 @@ let Profile = (props) => {
             </div>
             <div className={css.rightInfo}>
                 <ProfileInfo profile={props.profile} saveProfile={props.saveProfile} />
+                {props.albums && <Albums albums={props.albums} />}
             </div>
         </div>}
     </>
@@ -152,7 +133,8 @@ let mapStateToProps = (state) => {
         authorizedUserId: state.auth.userId,
         isAuth: state.auth.isAuth,
         friends: state.friends.friends,
-        friendsCount: state.friends.totalCount
+        friendsCount: state.friends.totalCount,
+        albums: state.profile.album
     })
 }
 

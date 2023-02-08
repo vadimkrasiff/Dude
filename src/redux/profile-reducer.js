@@ -1,11 +1,25 @@
 import { profileAPI } from "../api/api";
 import { initializeApp } from "./app-reducer";
 import { getPhotoProfile, setPhotoProfile } from "./auth-reducer";
+import photo1 from "./../data/_117310488_16.jpg"
+import photo2 from "./../data/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
+import photo3 from "./../data/phonepicutres-TA.webp"
+import photo4 from "./../data/tree-736885__480.jpg"
 
 let initialState = {
     profile: null,
     status: "",
-    isFetching: false
+    isFetching: false,
+    album: [
+        {
+            name: "Photo",
+            photo: [photo1, photo2, photo3, photo4],
+        },
+        {
+            name: "Photo",
+            photo: [photo1, photo2, photo3, photo4],
+        },
+    ]
 };
 
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
