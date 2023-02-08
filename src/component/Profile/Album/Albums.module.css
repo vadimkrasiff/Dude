@@ -1,0 +1,52 @@
+.albums {
+    margin-top: 20px;
+    padding: 20px 45px 20px 45px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    border-radius: 3px;
+}
+
+.titleAlbum {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.photos {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 10px 0;
+    width: 100%;
+}
+
+.modalPhotos {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    width: calc(100% + 15px);
+}
+
+
+.button {
+    background-color: #032E46;
+    width: 150px;
+    margin-left: 20px;
+}
+.modalTittle {
+    width: 1;
+    border-bottom: 1px solid #032E46;
+}
+
+.tittle {
+    margin: 10px 0 10px 0;
+    width: 1;
+}
+
+.modalAlbums {
+    display: flex;
+    width: 100%;
+    padding:  10px 0 10px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #032E46;
+}
