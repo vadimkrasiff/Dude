@@ -1,6 +1,5 @@
 import { CloseOutlined, EditOutlined } from "@ant-design/icons"
 import { Button, Modal, } from "antd"
-import { useRef } from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 import { connect } from "react-redux"
@@ -24,11 +23,7 @@ let Profile = (props) => {
     const [isPhoto, setNewPhoto] = useState(false);
     const [open, setOpen] = useState(false);
     const [currentPhoto, setCurrentPhoto] = useState('') 
- 
-    const refModal = useRef();
 
-
-    useOutsideClick(refModal, () => { setOpen(false) })
 
 
     const onMainPhotoSelected = (e) => {
@@ -75,7 +70,7 @@ let Profile = (props) => {
                         backgroundImage: `url(${!props.profile.photos.large && userPhoto})`,
                         backgroundSize: "100% 100%",
                     }} >
-                    <div ref={refModal} onClick={() => {props.profile.photos.large && setOpen(true);  setCurrentPhoto(props.profile.photos.large)}} style={{
+                    <div onClick={() => {props.profile.photos.large && setOpen(true);  setCurrentPhoto(props.profile.photos.large)}} style={{
                         cursor: "pointer",
                         backgroundImage: `url(${props.profile.photos.large})`,
                         backgroundPosition: "center",

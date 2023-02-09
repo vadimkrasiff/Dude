@@ -1,0 +1,16 @@
+.setPhoto {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff00;
+    width: 25%;
+    height: 100%;
+    transition: 0.1s;
+}
+
+.setPhoto:hover {
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.164);
+}

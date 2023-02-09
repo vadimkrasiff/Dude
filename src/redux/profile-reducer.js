@@ -5,6 +5,7 @@ import photo1 from "./../data/_117310488_16.jpg"
 import photo2 from "./../data/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg"
 import photo3 from "./../data/phonepicutres-TA.webp"
 import photo4 from "./../data/tree-736885__480.jpg"
+import { updateObjectInArray } from "../comon/objects-helper";
 
 let initialState = {
     profile: null,
@@ -12,11 +13,15 @@ let initialState = {
     isFetching: false,
     album: [
         {
+            name: "Avatars",
+            photo: [],
+        },
+        {
             name: "Photo",
             photo: [photo1, photo2, photo3, photo4],
         },
         {
-            name: "Photo",
+            name: "Photo1",
             photo: [photo1, photo2, photo3, photo4],
         },
     ]
@@ -32,7 +37,8 @@ const profileReducer = (state= initialState, action) => {
         case SET_USER_PROFILE:
             return {
                 ...state,
-                profile: action.profile
+                profile: action.profile,
+                album: updateObjectInArray(state.album, "Avatars", "name", { photo: [action.profile.photos.large] })
             }
             case SET_FETCHING:
             return {
@@ -43,7 +49,8 @@ const profileReducer = (state= initialState, action) => {
                 return {...state, profile: action.profile}
             }
             case SAVE_PHOTO_SUCCESS: {
-                return { ...state, profile: { ...state.profile, photos: action.photos } }}
+                return { ...state, profile: { ...state.profile, photos: action.photos },
+                album: updateObjectInArray(state.album, "Avatars", "name", { photo: [action.photos.large] }) }}
         default:
             return state;
     }

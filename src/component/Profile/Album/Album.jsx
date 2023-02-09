@@ -1,14 +1,14 @@
-import { Modal } from "antd";
+import { Modal, Typography } from "antd";
 import React, { useState } from "react";
 import Photo from "../Photo";
 import css from "./Albums.module.css"
 
-let Album = ({ albums }) => {
+let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [currentAlbum, setCurrentAlbum] = useState([])
-    const [currentPhoto, setCurrentPhoto] = useState('')
+    // const [open, setOpen] = useState(false);
+    const [currentAlbum, setCurrentAlbum] = useState({name:"", photo: []})
+    // const [currentPhoto, setCurrentPhoto] = useState('')
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -18,8 +18,10 @@ let Album = ({ albums }) => {
 
 
     return <>
+    
+    <Photo open={open} setOpen={setOpen} photo={currentPhoto} />
         <div className={css.modalAlbums}>
-            {albums.map((al) => (<div onClick={() => {showModal(); setCurrentAlbum(al.photo)}} style={{
+            {albums.map((al) => (<div onClick={() => {showModal(); setCurrentAlbum(al)}} style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-end",
@@ -41,8 +43,9 @@ let Album = ({ albums }) => {
             </div>))}
         </div>
         <Modal open={isModalOpen} footer={[]} width={800}  onCancel={handleCancel}>
+        <div className={css.modalTittle}><Typography.Title level={3}>{currentAlbum.name}</Typography.Title></div>
             <div className={css.modalPhotos}>
-            {currentAlbum.map((photo) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo) }} style={{
+            {currentAlbum.photo.map((photo) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo) }} style={{
                     backgroundImage: `url(${photo})`,
                     cursor: "pointer",
                     backgroundSize: "100% 100%",
@@ -54,7 +57,6 @@ let Album = ({ albums }) => {
                 }}>
 
                 </div>
-                    <Photo open={open} setOpen={setOpen} photo={currentPhoto} />
                 </div>))}
                 </div>
         </Modal>
