@@ -6,24 +6,36 @@ import css from "./Albums.module.css"
 
 let Albums = ({ albums }) => {
 
+    let i = 0;
+    const photos = []
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [open, setOpen] = useState(false);
     const [currentPhoto, setCurrentPhoto] = useState('')
-    const [currentAlbum, setCurrentAlbum] = useState({name:"", photo: []})
-    let i = 0;
+    const [currentPhotos, setCurrentPhotos] = useState([""])
+    const onPhotos = (album) => {
+        album.map(el=> {
+            el.photo.map(photo=>
+            photos.push(photo))
+            
+        })
+        console.log(photos)
+        setCurrentPhotos(photos);
+    }
+    
     const showModal = () => {
         setIsModalOpen(true);
     };
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
     return <>
-    <Photo open={open} setOpen={setOpen} photo={currentPhoto} />
+    <Photo open={open} setOpen={setOpen} setCurrentPhoto={setCurrentPhoto} photo={currentPhoto} photos={currentPhotos}  />
         <div className={css.albums}>
             <div className={css.titleAlbum}>Albums  <Button type="primary" onClick={showModal} className={css.button} >Show all</Button></div>
             <div className={css.photos}>
-                {albums.map((el) => (el.photo.map((photo) => i < 3 && ++i && (<div onClick={() => { setOpen(true); setCurrentPhoto(photo); setCurrentAlbum(el)}} style={{
+                {albums.map((el) => (el.photo.map((photo) => photo !== null  &&  (<div onClick={() => {
+                    setOpen(true); setCurrentPhoto(photo); onPhotos(albums)}}
+                    style={{
                     backgroundImage: `url(${photo})`,
                     backgroundSize: "100% 100%",
                     cursor: "pointer",
@@ -39,10 +51,11 @@ let Albums = ({ albums }) => {
         <Modal open={isModalOpen} footer={[]} width={800} onCancel={handleCancel}>
             <div className={css.modalTittle}><Typography.Title level={3}>Photos</Typography.Title></div>
             <div className={css.tittle}><Typography.Title level={4}>Albums</Typography.Title></div>
-            <Album albums={albums} open={open} setOpen={setOpen} currentPhoto={currentPhoto} setCurrentPhoto={setCurrentPhoto} />
+            <Album albums={albums} open={open} setOpen={setOpen} currentPhoto={currentPhoto} setCurrentPhoto={setCurrentPhoto} onPhotos={onPhotos} />
+            <Photo open={open} setOpen={setOpen} setCurrentPhoto={setCurrentPhoto} photo={currentPhoto} photos={currentPhotos}  />
             <div className={css.modalPhotos}>
 
-                {albums.map(el => (el.photo.map((photo) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo) }} style={{
+                {albums.map(el => (el.photo.map((photo) => (photo!== null &&<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo); onPhotos(albums)}} style={{
                     backgroundImage: `url(${photo})`,
                     cursor: "pointer",
                     backgroundSize: "100% 100%",

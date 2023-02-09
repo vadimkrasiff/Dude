@@ -20,10 +20,6 @@ let initialState = {
             name: "Photo",
             photo: [photo1, photo2, photo3, photo4],
         },
-        {
-            name: "Photo1",
-            photo: [photo1, photo2, photo3, photo4],
-        },
     ]
 };
 

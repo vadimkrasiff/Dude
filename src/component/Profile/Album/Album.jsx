@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import Photo from "../Photo";
 import css from "./Albums.module.css"
 
-let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto }) => {
+let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto}) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [open, setOpen] = useState(false);
     const [currentAlbum, setCurrentAlbum] = useState({name:"", photo: []})
-    // const [currentPhoto, setCurrentPhoto] = useState('')
+    const [currentPhotos, setCurrentPhotos] = useState([])
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -17,11 +17,12 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto }) => {
     };
 
 
+
     return <>
     
-    <Photo open={open} setOpen={setOpen} photo={currentPhoto} />
+    <Photo open={open} setOpen={setOpen } setCurrentPhoto={setCurrentPhoto} photos={currentPhotos} photo={currentPhoto} />
         <div className={css.modalAlbums}>
-            {albums.map((al) => (<div onClick={() => {showModal(); setCurrentAlbum(al)}} style={{
+            {albums.map((al) => ( al.photo[0] !== null && <div onClick={() => {showModal(); setCurrentAlbum(al)}} style={{
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-end",
@@ -44,8 +45,9 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto }) => {
         </div>
         <Modal open={isModalOpen} footer={[]} width={800}  onCancel={handleCancel}>
         <div className={css.modalTittle}><Typography.Title level={3}>{currentAlbum.name}</Typography.Title></div>
+        <Photo open={open} setOpen={setOpen } setCurrentPhoto={setCurrentPhoto} photos={currentPhotos} photo={currentPhoto} />
             <div className={css.modalPhotos}>
-            {currentAlbum.photo.map((photo) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo) }} style={{
+            {currentAlbum.photo.map((photo, index) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo); setCurrentPhotos(currentAlbum.photo)}} style={{
                     backgroundImage: `url(${photo})`,
                     cursor: "pointer",
                     backgroundSize: "100% 100%",
@@ -55,11 +57,11 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto }) => {
                     marginBottom: 15,
                     marginRight: 15,
                 }}>
-
                 </div>
                 </div>))}
                 </div>
         </Modal>
+        
     </>
 }
 
