@@ -42,7 +42,7 @@
 
 .buttons {
     font-size: 1.5rem;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     align-items: center;
     width: 100%;
@@ -50,9 +50,14 @@
     box-sizing: border-box;
     color: #032E46;
     border-bottom: 2px solid #032E46;
+    position: relative;
 }
 
 .like {
     cursor: pointer;
     transition: 0.1s;
+}
+
+.likeOp {
+    opacity: 0;
 }

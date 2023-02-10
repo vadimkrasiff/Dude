@@ -73,7 +73,10 @@ let Photo = ({ open, setOpen, photo, photos, setCurrentPhoto, profile }) => {
                     </div>
                 </div>
                 <div className={css.buttons}>
-                    <div className={css.like} onClick={()=>{setLike(!like)}}>{!like ? <HeartOutlined/> : < HeartFilled style={{color:"#FF3347"}} />}</div>
+                    <div  onClick={()=>{setLike(!like)}}>
+                        <HeartOutlined className={`${css.like} ${like && css.likeOp}`} style={{position: "relative"}} />
+                    < HeartFilled className={`${css.like} ${!like && css.likeOp}`} style={{color:"#FF3347", position: "absolute", left: 20, top: 17}} />
+                    </div>
                 </div>
             </div>}
             <Button onClick={() => setOpen(false)} type="text"
