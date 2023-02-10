@@ -49,13 +49,13 @@
     height: 60px;  
     box-sizing: border-box;
     color: #032E46;
-    border-bottom: 2px solid #032E46;
+    border-bottom: 1px solid #032E46;
     position: relative;
 }
 
 .like {
     cursor: pointer;
-    transition: 0.1s;
+    transition: 0.15s;
 }
 
 .likeOp {

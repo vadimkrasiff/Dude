@@ -19,6 +19,7 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto}) => {
 
 
     return <>
+    
         <div className={css.modalAlbums}>
             {albums.map((al) => ( al.photo[0] !== null && <div onClick={() => {showModal(); setCurrentAlbum(al)}} style={{
                 display: "flex",
@@ -42,8 +43,8 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto}) => {
             </div>))}
         </div>
         <Modal open={isModalOpen} footer={[]} width={800}  onCancel={handleCancel}>
-        <div className={css.modalTittle}><Typography.Title level={3}>{currentAlbum.name}</Typography.Title></div>
         <Photo open={open} setOpen={setOpen } setCurrentPhoto={setCurrentPhoto} photos={currentPhotos} photo={currentPhoto} />
+        <div className={css.modalTittle}><Typography.Title level={3}>{currentAlbum.name}</Typography.Title></div>
             <div className={css.modalPhotos}>
             {currentAlbum.photo.map((photo, index) => (<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo); setCurrentPhotos(currentAlbum.photo)}} style={{
                     backgroundImage: `url(${photo})`,

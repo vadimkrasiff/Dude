@@ -52,9 +52,9 @@ let Albums = ({ albums }) => {
             <div className={css.modalTittle}><Typography.Title level={3}>Photos</Typography.Title></div>
             <div className={css.tittle}><Typography.Title level={4}>Albums</Typography.Title></div>
             <Album albums={albums} open={open} setOpen={setOpen} currentPhoto={currentPhoto} setCurrentPhoto={setCurrentPhoto} onPhotos={onPhotos} />
-            <Photo open={open} setOpen={setOpen} setCurrentPhoto={setCurrentPhoto} photo={currentPhoto} photos={currentPhotos}  />
+           
             <div className={css.modalPhotos}>
-
+            <Photo open={open} setOpen={setOpen} setCurrentPhoto={setCurrentPhoto} photo={currentPhoto} photos={currentPhotos}  />
                 {albums.map(el => (el.photo.map((photo) => (photo!== null &&<div> <div onClick={() => { setOpen(true); setCurrentPhoto(photo); onPhotos(albums)}} style={{
                     backgroundImage: `url(${photo})`,
                     cursor: "pointer",
