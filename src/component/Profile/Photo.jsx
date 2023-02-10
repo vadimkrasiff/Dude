@@ -35,7 +35,7 @@ let Photo = ({ open, setOpen, photo, photos, setCurrentPhoto, profile }) => {
             onOk={() => setOpen(false)}
             onCancel={() => setOpen(false)}
             centered
-            width={800}
+            width={900}
             bodyStyle={{ height: 600, overflow: "hidden" }}
         >
 
@@ -46,9 +46,10 @@ let Photo = ({ open, setOpen, photo, photos, setCurrentPhoto, profile }) => {
                 top: 0,
                 left: 0,
                 backgroundImage: `url(${photo})`,
+                backgroundPosition: "center",
                 backgroundSize: "100% 100%",
                 height: "100%",
-                width: 500,
+                width: 600,
                 borderRadius: "5px 0  0 5px",
             }}>
 
