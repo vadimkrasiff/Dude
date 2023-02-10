@@ -19,8 +19,6 @@ let Album = ({ albums, open,currentPhoto, setOpen, setCurrentPhoto}) => {
 
 
     return <>
-    
-    <Photo open={open} setOpen={setOpen } setCurrentPhoto={setCurrentPhoto} photos={currentPhotos} photo={currentPhoto} />
         <div className={css.modalAlbums}>
             {albums.map((al) => ( al.photo[0] !== null && <div onClick={() => {showModal(); setCurrentAlbum(al)}} style={{
                 display: "flex",
